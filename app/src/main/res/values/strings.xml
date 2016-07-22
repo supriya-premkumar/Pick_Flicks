@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">PickFlicks</string>
+    <string name="app_name">Pick Flicks</string>
+    <string name="pick_the_movie">pick the movie</string>
 </resources>
