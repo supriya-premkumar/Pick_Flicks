@@ -1,6 +1,7 @@
 package me.supriyapremkumar.pickflicks.Adapter;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 import me.supriyapremkumar.pickflicks.Models.Movie;
 import me.supriyapremkumar.pickflicks.R;
 
@@ -24,32 +26,47 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie>{
         super(context, android.R.layout.simple_list_item_1, movies);
     }
 
+
+    // View lookup cache
+    private static class ViewHolder {
+        ImageView ivMovie;
+        TextView tvTitle;
+        TextView overView;
+    }
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //get the data item for position
         Movie movie = getItem(position);
 
         //check the existing view is being reused
+        ViewHolder viewHolder;          //view lookup cache stored in tag
         if(convertView == null){
+            viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.adapter_item_movie, parent, false);
+            viewHolder.ivMovie = (ImageView)convertView.findViewById(R.id.movieImage);
+            viewHolder.tvTitle = (TextView)convertView.findViewById(R.id.tvTitle);
+            viewHolder.overView = (TextView)convertView.findViewById(R.id.tvOverview);
+            convertView.setTag(viewHolder);
+        } else{
+            viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        //find image view
-        ImageView imageView = (ImageView)convertView.findViewById(R.id.movieImage);
+        //populate the data into the template view using the data object
+        viewHolder.ivMovie.setImageResource(0);
+        viewHolder.tvTitle.setText(movie.getOriginalTitle());
+        viewHolder.overView.setText(movie.getOverview());
 
-        //clear out image from convertview
-        imageView.setImageResource(0);
 
-        TextView tvTitle = (TextView)convertView.findViewById(R.id.tvTitle);
-        TextView tvOverview = (TextView)convertView.findViewById(R.id.tvOverview);
-
-        //populate the data
-        tvTitle.setText(movie.getOriginalTitle());
-        tvOverview.setText(movie.getOverview());
-
-        Picasso.with(getContext()).load(movie.getPosterPath()).into(imageView);
-
+        boolean isLandscape = getContext().getResources().getConfiguration().orientation ==
+                Configuration.ORIENTATION_LANDSCAPE;
+        if(isLandscape){
+            Picasso.with(getContext()).load(movie.getBackdropImage()).transform(new RoundedCornersTransformation(10,10)).into(viewHolder.ivMovie);
+        }else {
+            Picasso.with(getContext()).load(movie.getPosterPath()).transform(new RoundedCornersTransformation(20,20)).into(viewHolder.ivMovie);
+        }
         return convertView;
 
 
