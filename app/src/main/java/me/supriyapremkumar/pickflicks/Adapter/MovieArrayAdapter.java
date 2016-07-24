@@ -9,8 +9,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ramotion.foldingcell.FoldingCell;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashSet;
 import java.util.List;
 
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
@@ -21,6 +23,8 @@ import me.supriyapremkumar.pickflicks.R;
  * Created by supriya on 7/20/16.
  */
 public class MovieArrayAdapter extends ArrayAdapter<Movie>{
+    private HashSet<Integer> unfoldedIndexes = new HashSet<>();
+
 
     public MovieArrayAdapter(Context context, List<Movie> movies){
         super(context, android.R.layout.simple_list_item_1, movies);
@@ -32,6 +36,11 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie>{
         ImageView ivMovie;
         TextView tvTitle;
         TextView overView;
+
+        ImageView movieImage;
+        ImageView movieIcon;
+        TextView movieOverView;
+        TextView movieTitle;
     }
 
 
@@ -39,36 +48,75 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie>{
     public View getView(int position, View convertView, ViewGroup parent) {
         //get the data item for position
         Movie movie = getItem(position);
-
+        FoldingCell cell = (FoldingCell) convertView;
         //check the existing view is being reused
-        ViewHolder viewHolder;          //view lookup cache stored in tag
-        if(convertView == null){
-            viewHolder = new ViewHolder();
+        ViewHolder foldedViewHolder;          //view lookup cache stored in tag
+
+        if(cell == null){
+            foldedViewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.adapter_item_movie, parent, false);
-            viewHolder.ivMovie = (ImageView)convertView.findViewById(R.id.movieImage);
-            viewHolder.tvTitle = (TextView)convertView.findViewById(R.id.tvTitle);
-            viewHolder.overView = (TextView)convertView.findViewById(R.id.tvOverview);
-            convertView.setTag(viewHolder);
+            cell = (FoldingCell)inflater.inflate(R.layout.cell, parent, false);
+            foldedViewHolder.ivMovie = (ImageView)cell.findViewById(R.id.movieImage);
+            foldedViewHolder.tvTitle = (TextView)cell.findViewById(R.id.tvTitle);
+            foldedViewHolder.overView = (TextView)cell.findViewById(R.id.tvOverview);
+
+            foldedViewHolder.movieIcon = (ImageView)cell.findViewById(R.id.movie_icon);
+            foldedViewHolder.movieTitle = (TextView)cell.findViewById(R.id.movie_title);
+            foldedViewHolder.movieImage = (ImageView)cell.findViewById(R.id.head_image);
+            foldedViewHolder.movieOverView = (TextView)cell.findViewById(R.id.content_overView);
+
+            cell.setTag(foldedViewHolder);
         } else{
-            viewHolder = (ViewHolder)convertView.getTag();
+            // for existing cell set valid valid state(without animation)
+            if (unfoldedIndexes.contains(position)) {
+                cell.unfold(true);
+            } else {
+                cell.fold(true);
+            }
+           foldedViewHolder = (ViewHolder)cell.getTag();
         }
 
         //populate the data into the template view using the data object
-        viewHolder.ivMovie.setImageResource(0);
-        viewHolder.tvTitle.setText(movie.getOriginalTitle());
-        viewHolder.overView.setText(movie.getOverview());
+        foldedViewHolder.ivMovie.setImageResource(0);
+        foldedViewHolder.tvTitle.setText(movie.getOriginalTitle());
+        foldedViewHolder.overView.setText(movie.getOverview());
 
+
+        foldedViewHolder.movieImage.setImageResource(0);
+        foldedViewHolder.movieIcon.setImageResource(0);
+        foldedViewHolder.movieTitle.setText(movie.getOriginalTitle());
+
+        foldedViewHolder.movieOverView.setText(movie.getOverview());
 
         boolean isLandscape = getContext().getResources().getConfiguration().orientation ==
                 Configuration.ORIENTATION_LANDSCAPE;
         if(isLandscape){
-            Picasso.with(getContext()).load(movie.getBackdropImage()).transform(new RoundedCornersTransformation(10,10)).into(viewHolder.ivMovie);
+            Picasso.with(getContext()).load(movie.getBackdropImage()).transform(new RoundedCornersTransformation(10,10)).into(foldedViewHolder.ivMovie);
+            Picasso.with(getContext()).load(movie.getBackdropImage()).transform(new RoundedCornersTransformation(10,10)).resize(1024, 512).into(foldedViewHolder.movieImage);
+            Picasso.with(getContext()).load(movie.getPosterPath()).transform(new RoundedCornersTransformation(20,20)).resize(256,256).into(foldedViewHolder.movieIcon);
+
         }else {
-            Picasso.with(getContext()).load(movie.getPosterPath()).transform(new RoundedCornersTransformation(20,20)).into(viewHolder.ivMovie);
+            Picasso.with(getContext()).load(movie.getPosterPath()).transform(new RoundedCornersTransformation(20,20)).into(foldedViewHolder.ivMovie);
+            Picasso.with(getContext()).load(movie.getBackdropImage()).transform(new RoundedCornersTransformation(10,10)).resize(1024, 512).into(foldedViewHolder.movieImage);
+            Picasso.with(getContext()).load(movie.getPosterPath()).transform(new RoundedCornersTransformation(20,20)).resize(256,256).into(foldedViewHolder.movieIcon);
         }
-        return convertView;
+        return cell;
 
+    }
 
+    // simple methods for register cell state changes
+    public void registerToggle(int position) {
+        if (unfoldedIndexes.contains(position))
+            registerFold(position);
+        else
+            registerUnfold(position);
+    }
+
+    public void registerFold(int position) {
+        unfoldedIndexes.remove(position);
+    }
+
+    public void registerUnfold(int position) {
+        unfoldedIndexes.add(position);
     }
 }

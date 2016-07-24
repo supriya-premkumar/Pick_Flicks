@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:baselineAligned="false"
+    android:background="@color/bgContent"
+    >
 
     <ImageView
+
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:id="@+id/movieImage"
         tools:src="@mipmap/ic_launcher"
         android:maxHeight="179dp"
+        android:background="@color/bgTitleLeft"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
         android:layout_alignParentTop="true"
@@ -24,10 +34,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         tools:text="Independence Day: Resurgence"
+        android:maxHeight="179dp"
         android:id="@+id/tvTitle"
         android:gravity="center_vertical"
-        android:textColor="@android:color/white"
-        android:layout_marginLeft="6dp"
+        android:textColor="@color/mainTextColor"
+        android:layout_marginStart="6dp"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/movieImage"
         android:layout_toEndOf="@+id/movieImage" />
@@ -38,11 +49,13 @@
         tools:text="We always knew they were coming back. Using recovered alien technology, the nations of Earth have collaborated on an immense defense program to protect the planet. But nothing can prepare us for the aliens’ advanced and unprecedented force. Only the ingenuity of a few brave men and women can bring our world back from the brink of extinction."
         android:id="@+id/tvOverview"
         android:layout_marginLeft="6dp"
+        android:maxHeight="179dp"
         android:lines="8"
-        android:textColor="@android:color/white"
+        android:textColor="@color/mainTextColor"
         android:gravity="center_vertical"
         android:layout_below="@+id/tvTitle"
         android:layout_toRightOf="@+id/movieImage"
         android:layout_toEndOf="@+id/movieImage"
         android:layout_marginTop="6dp"/>
-</RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>
