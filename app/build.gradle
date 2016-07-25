@@ -7,6 +7,7 @@ apply plugin: 'android-apt'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.0"
+    dataBinding.enabled = true
 
     defaultConfig {
         applicationId "me.supriyapremkumar.pickflicks"
