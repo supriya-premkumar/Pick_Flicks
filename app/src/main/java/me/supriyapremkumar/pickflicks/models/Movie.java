@@ -10,10 +10,15 @@ import java.util.ArrayList;
  * Created by supriya on 7/20/16.
  */
 public class Movie{
+    String id;
     String posterPath;
     String originalTitle;
     String overview;
     String backdropImage;
+    String releaseDate;
+    String rating;
+
+
 
     public String getPosterPath() {
         return String.format("https://image.tmdb.org/t/p/w342/%s", posterPath);
@@ -32,11 +37,26 @@ public class Movie{
 
     }
 
+    public String getReleaseDate(){
+        return releaseDate;
+    }
+
+    public String getMovieRating(){
+        return rating;
+    }
+
+    public String getId(){
+        return id;
+    }
+
     public  Movie(JSONObject jsonObject) throws JSONException{
+        this.id = jsonObject.getString("id");
         this.posterPath = jsonObject.getString("poster_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
         this.backdropImage = jsonObject.getString("backdrop_path");
+        this.releaseDate = jsonObject.getString("release_date");
+        this.rating = jsonObject.getString("vote_average");
 
     }
 

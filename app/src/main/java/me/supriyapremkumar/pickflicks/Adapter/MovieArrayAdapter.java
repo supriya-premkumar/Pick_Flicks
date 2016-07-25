@@ -1,6 +1,7 @@
 package me.supriyapremkumar.pickflicks.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+import me.supriyapremkumar.pickflicks.Activities.PlayTrailerActivity;
 import me.supriyapremkumar.pickflicks.Models.Movie;
 import me.supriyapremkumar.pickflicks.R;
 
@@ -37,20 +39,22 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie>{
         TextView tvTitle;
         TextView overView;
 
-        ImageView movieImage;
+        ImageView trailer;
         ImageView movieIcon;
         TextView movieOverView;
         TextView movieTitle;
+        TextView rating;
+        TextView releaseDate;
     }
 
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //get the data item for position
-        Movie movie = getItem(position);
+        final Movie movie = getItem(position);
         FoldingCell cell = (FoldingCell) convertView;
         //check the existing view is being reused
-        ViewHolder foldedViewHolder;          //view lookup cache stored in tag
+        final ViewHolder foldedViewHolder;          //view lookup cache stored in tag
 
         if(cell == null){
             foldedViewHolder = new ViewHolder();
@@ -62,8 +66,12 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie>{
 
             foldedViewHolder.movieIcon = (ImageView)cell.findViewById(R.id.movie_icon);
             foldedViewHolder.movieTitle = (TextView)cell.findViewById(R.id.movie_title);
-            foldedViewHolder.movieImage = (ImageView)cell.findViewById(R.id.head_image);
+
+            foldedViewHolder.trailer = (ImageView) cell.findViewById(R.id.head_image);
+
             foldedViewHolder.movieOverView = (TextView)cell.findViewById(R.id.content_overView);
+            foldedViewHolder.releaseDate = (TextView)cell.findViewById(R.id.date);
+            foldedViewHolder.rating = (TextView)cell.findViewById(R.id.rating);
 
             cell.setTag(foldedViewHolder);
         } else{
@@ -81,23 +89,38 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie>{
         foldedViewHolder.tvTitle.setText(movie.getOriginalTitle());
         foldedViewHolder.overView.setText(movie.getOverview());
 
-
-        foldedViewHolder.movieImage.setImageResource(0);
         foldedViewHolder.movieIcon.setImageResource(0);
         foldedViewHolder.movieTitle.setText(movie.getOriginalTitle());
+        foldedViewHolder.trailer.setImageResource(0);
+        foldedViewHolder.trailer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Log.d("SUPRIYA", movie.getId)
+                Intent intent = new Intent(getContext(), PlayTrailerActivity.class);
+                intent.putExtra("movie_id", movie.getId());
+                getContext().startActivity(intent);
+
+            }
+        });
 
         foldedViewHolder.movieOverView.setText(movie.getOverview());
+        foldedViewHolder.releaseDate.setText(movie.getReleaseDate());
+        foldedViewHolder.rating.setText(movie.getMovieRating());
 
-        boolean isLandscape = getContext().getResources().getConfiguration().orientation ==
+
+
+
+
+        final boolean isLandscape = getContext().getResources().getConfiguration().orientation ==
                 Configuration.ORIENTATION_LANDSCAPE;
         if(isLandscape){
             Picasso.with(getContext()).load(movie.getBackdropImage()).transform(new RoundedCornersTransformation(10,10)).into(foldedViewHolder.ivMovie);
-            Picasso.with(getContext()).load(movie.getBackdropImage()).transform(new RoundedCornersTransformation(10,10)).resize(1024, 512).into(foldedViewHolder.movieImage);
+            Picasso.with(getContext()).load(movie.getBackdropImage()).transform(new RoundedCornersTransformation(10,10)).resize(1024, 512).into(foldedViewHolder.trailer);
             Picasso.with(getContext()).load(movie.getPosterPath()).transform(new RoundedCornersTransformation(20,20)).resize(256,256).into(foldedViewHolder.movieIcon);
 
         }else {
             Picasso.with(getContext()).load(movie.getPosterPath()).transform(new RoundedCornersTransformation(20,20)).into(foldedViewHolder.ivMovie);
-            Picasso.with(getContext()).load(movie.getBackdropImage()).transform(new RoundedCornersTransformation(10,10)).resize(1024, 512).into(foldedViewHolder.movieImage);
+            Picasso.with(getContext()).load(movie.getBackdropImage()).transform(new RoundedCornersTransformation(10,10)).resize(1024, 512).into(foldedViewHolder.trailer);
             Picasso.with(getContext()).load(movie.getPosterPath()).transform(new RoundedCornersTransformation(20,20)).resize(256,256).into(foldedViewHolder.movieIcon);
         }
         return cell;

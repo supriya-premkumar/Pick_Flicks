@@ -20,7 +20,4 @@ public class MovieDetails {
     private TextView overView;
     private TextView releaseDate;
     private TextView rating;
-
-
-
 }
