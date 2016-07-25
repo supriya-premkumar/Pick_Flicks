@@ -60,7 +60,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         } else {
             return 0;
         }
-        //return getItem(pos).getMovieRating();
+
     }
 
 
@@ -83,11 +83,8 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
                 foldedViewHolder.overView = (TextView) cell.findViewById(R.id.tvOverview);
 
 
-
-
                 foldedViewHolder.movieIcon = (ImageView) cell.findViewById(R.id.movie_icon);
                 foldedViewHolder.movieTitle = (TextView) cell.findViewById(R.id.movie_title);
-
                 foldedViewHolder.trailer = (ImageView) cell.findViewById(R.id.head_image);
 
                 foldedViewHolder.movieOverView = (TextView) cell.findViewById(R.id.content_overView);
@@ -178,17 +175,6 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
                 cell = getHeterogeneousView(parent, type);
                 foldedViewHolder.ivMovie = (ImageView) cell.findViewById(R.id.movieImage);
-
-
-//                foldedViewHolder.movieIcon = (ImageView)cell.findViewById(R.id.movie_icon);
-//                foldedViewHolder.movieTitle = (TextView)cell.findViewById(R.id.movie_title);
-//
-//                foldedViewHolder.trailer = (ImageView) cell.findViewById(R.id.head_image);
-//
-//                foldedViewHolder.movieOverView = (TextView)cell.findViewById(R.id.content_overView);
-//                foldedViewHolder.releaseDate = (TextView)cell.findViewById(R.id.date);
-//                foldedViewHolder.rating = (TextView)cell.findViewById(R.id.rating);
-
                 cell.setTag(foldedViewHolder);
             } else {
                 // for existing cell set valid valid state(without animation)
@@ -216,13 +202,9 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
                     Configuration.ORIENTATION_LANDSCAPE;
             if (isLandscape) {
                 Picasso.with(getContext()).load(movie.getBackdropImage()).transform(new RoundedCornersTransformation(10, 10)).into(foldedViewHolder.ivMovie);
-                //Picasso.with(getContext()).load(movie.getBackdropImage()).transform(new RoundedCornersTransformation(10,10)).resize(1024, 512).into(foldedViewHolder.trailer);
-                //Picasso.with(getContext()).load(movie.getPosterPath()).transform(new RoundedCornersTransformation(20,20)).resize(256,256).into(foldedViewHolder.movieIcon);
 
             } else {
                 Picasso.with(getContext()).load(movie.getBackdropImage()).transform(new RoundedCornersTransformation(20, 20)).resize(1024, 512).into(foldedViewHolder.ivMovie);
-                //Picasso.with(getContext()).load(movie.getBackdropImage()).transform(new RoundedCornersTransformation(10,10)).resize(1024, 512).into(foldedViewHolder.trailer);
-                //Picasso.with(getContext()).load(movie.getPosterPath()).transform(new RoundedCornersTransformation(20,20)).resize(256,256).into(foldedViewHolder.movieIcon);
             }
             return cell;
         }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by supriya on 7/20/16.
  */
-public class Movie{
+public class Movie {
     String id;
     String posterPath;
     String originalTitle;
@@ -17,8 +17,6 @@ public class Movie{
     String backdropImage;
     String releaseDate;
     String rating;
-
-
 
     public String getPosterPath() {
         return String.format("https://image.tmdb.org/t/p/w342/%s", posterPath);
@@ -37,19 +35,19 @@ public class Movie{
 
     }
 
-    public String getReleaseDate(){
+    public String getReleaseDate() {
         return releaseDate;
     }
 
-    public String getMovieRating(){
+    public String getMovieRating() {
         return rating;
     }
 
-    public String getId(){
+    public String getId() {
         return id;
     }
 
-    public  Movie(JSONObject jsonObject) throws JSONException{
+    public Movie(JSONObject jsonObject) throws JSONException {
         this.id = jsonObject.getString("id");
         this.posterPath = jsonObject.getString("poster_path");
         this.originalTitle = jsonObject.getString("original_title");
@@ -60,12 +58,12 @@ public class Movie{
 
     }
 
-    public static ArrayList<Movie> fromJSONArray(JSONArray array){
+    public static ArrayList<Movie> fromJSONArray(JSONArray array) {
         ArrayList<Movie> results = new ArrayList<>();
 
-        for(int x = 0; x < array.length(); x++){
+        for (int x = 0; x < array.length(); x++) {
             try {
-               results.add(new Movie(array.getJSONObject(x)));
+                results.add(new Movie(array.getJSONObject(x)));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -73,7 +71,6 @@ public class Movie{
 
         return results;
     }
-
 
 }
 

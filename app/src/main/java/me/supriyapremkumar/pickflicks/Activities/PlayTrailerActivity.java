@@ -20,15 +20,11 @@ import cz.msebera.android.httpclient.Header;
 import me.supriyapremkumar.pickflicks.Models.Trailer;
 import me.supriyapremkumar.pickflicks.R;
 
-public class PlayTrailerActivity extends YouTubeBaseActivity{
+public class PlayTrailerActivity extends YouTubeBaseActivity {
     private AsyncHttpClient client = new AsyncHttpClient();
     //private String trailerSrc = new String();
     private JSONArray trailerJsonResults = new JSONArray();
     private ArrayList<Trailer> trailers;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +52,7 @@ public class PlayTrailerActivity extends YouTubeBaseActivity{
                                     trailerJsonResults = response.getJSONArray("youtube");
                                     trailers.addAll(Trailer.fromJSONArray(trailerJsonResults));
                                     Log.d("YOUTUBE", String.valueOf(trailers));
-                                    for (Trailer t: trailers) {
+                                    for (Trailer t : trailers) {
                                         if (t.getType().equals("Trailer")) {
                                             youTubePlayer.loadVideo(t.getSrc());
                                             break;
@@ -81,7 +77,6 @@ public class PlayTrailerActivity extends YouTubeBaseActivity{
                     @Override
                     public void onInitializationFailure(YouTubePlayer.Provider provider,
                                                         YouTubeInitializationResult youTubeInitializationResult) {
-
                     }
                 });
 
