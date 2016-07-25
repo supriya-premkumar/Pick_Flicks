@@ -37,19 +37,6 @@
             android:id="@+id/head_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-             />
-        <ImageView
-
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-
-            android:id="@+id/playIcon"
-            tools:src="@mipmap/ic_launcher"
-            android:backgroundTint="@color/bgTitleLeft"
-            android:src="@drawable/ic_play_circle_filled_white_24dp"
-            android:scaleType="fitXY"
-            android:layout_centerInParent="true"
-
             />
 
 
@@ -81,7 +68,6 @@
                 android:layout_centerVertical="true"
                 android:maxHeight="128dp"
                 android:maxWidth="128dp"
-                tools:src="@drawable/avatar"
                 android:scaleType="fitXY"
                 />
 
@@ -134,12 +120,12 @@
                 android:layout_weight="1">
 
                 <!--<TextView-->
-                    <!--android:id="@+id/content_from_badge"-->
-                    <!--style="@style/ContentMainBadgeTitle"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignParentStart="true"-->
-                    <!--/>-->
+                <!--android:id="@+id/content_from_badge"-->
+                <!--style="@style/ContentMainBadgeTitle"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--/>-->
 
                 <!--android:layout_alignStart="@id/content_from_badge"-->
                 <!--android:layout_below="@id/content_from_badge"-->
@@ -167,38 +153,38 @@
             </RelativeLayout>
 
             <!--<RelativeLayout-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1">-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1">-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/content_to_badge"-->
-                    <!--style="@style/ContentMainBadgeTitle"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignParentStart="true"-->
-                    <!--android:text="@string/to_badge" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/content_to_badge"-->
+            <!--style="@style/ContentMainBadgeTitle"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:text="@string/to_badge" />-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/content_to_address_1"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignStart="@id/content_to_badge"-->
-                    <!--android:layout_below="@id/content_to_badge"-->
-                    <!--android:text="@string/content_to1_mock"-->
-                    <!--android:textColor="@color/mainTextColor"-->
-                    <!--android:textSize="18sp"-->
-                    <!--android:textStyle="bold" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/content_to_address_1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignStart="@id/content_to_badge"-->
+            <!--android:layout_below="@id/content_to_badge"-->
+            <!--android:text="@string/content_to1_mock"-->
+            <!--android:textColor="@color/mainTextColor"-->
+            <!--android:textSize="18sp"-->
+            <!--android:textStyle="bold" />-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/content_to_address_2"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignStart="@id/content_to_address_1"-->
-                    <!--android:layout_below="@id/content_to_address_1"-->
-                    <!--android:text="@string/content_to2_mock"-->
-                    <!--android:textColor="@color/mainTextColor"-->
-                    <!--android:textSize="14sp" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/content_to_address_2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignStart="@id/content_to_address_1"-->
+            <!--android:layout_below="@id/content_to_address_1"-->
+            <!--android:text="@string/content_to2_mock"-->
+            <!--android:textColor="@color/mainTextColor"-->
+            <!--android:textSize="14sp" />-->
 
             <!--</RelativeLayout>-->
 
@@ -225,12 +211,12 @@
                 android:layout_weight="1">
 
                 <!--<TextView-->
-                    <!--android:id="@+id/content_delivery_date_badge"-->
-                    <!--style="@style/ContentMainBadgeTitle"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignParentStart="true"-->
-                    <!--/>-->
+                <!--android:id="@+id/content_delivery_date_badge"-->
+                <!--style="@style/ContentMainBadgeTitle"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--/>-->
                 <!--android:layout_alignStart="@id/content_delivery_date_badge"-->
                 <!--android:layout_below="@id/content_delivery_date_badge"-->
 
