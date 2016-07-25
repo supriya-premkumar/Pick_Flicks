@@ -264,6 +264,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:id="@+id/more_details"
             android:padding="10dp"
             android:text="@string/request_btn_text"
             android:background="@color/btnRequest"

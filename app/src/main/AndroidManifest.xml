@@ -17,8 +17,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.PlayTrailerActivity"
-                  android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".Activities.PlayTrailerActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".Activities.TicketsBookingActivity"></activity>
     </application>
 
 </manifest>

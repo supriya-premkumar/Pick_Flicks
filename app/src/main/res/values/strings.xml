@@ -21,7 +21,7 @@
     <string name="delivery_date_mock" translatable="false">May 16, 2016</string>
     <string name="deadline_badge" translatable="false">REQUEST DEADLINE</string>
     <string name="deadline_time_mock" translatable="false">24 minutes</string>
-    <string name="request_btn_text" translatable="false">Book Tickets Now!</string>
+    <string name="request_btn_text" translatable="false">Read More and Book Tickets!</string>
     <string name="btn_annotation_mock" translatable="false">5 people have sent a request</string>
     <string name="content_from1_mock">Release Date:</string>
     <string name="content_from2_mock">New York, NY 10025</string>

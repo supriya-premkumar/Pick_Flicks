@@ -18,6 +18,7 @@ import java.util.List;
 
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 import me.supriyapremkumar.pickflicks.Activities.PlayTrailerActivity;
+import me.supriyapremkumar.pickflicks.Activities.TicketsBookingActivity;
 import me.supriyapremkumar.pickflicks.Models.Movie;
 import me.supriyapremkumar.pickflicks.R;
 
@@ -81,6 +82,9 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
                 foldedViewHolder.tvTitle = (TextView) cell.findViewById(R.id.tvTitle);
                 foldedViewHolder.overView = (TextView) cell.findViewById(R.id.tvOverview);
 
+
+
+
                 foldedViewHolder.movieIcon = (ImageView) cell.findViewById(R.id.movie_icon);
                 foldedViewHolder.movieTitle = (TextView) cell.findViewById(R.id.movie_title);
 
@@ -109,6 +113,18 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
             foldedViewHolder.movieIcon.setImageResource(0);
             foldedViewHolder.movieTitle.setText(movie.getOriginalTitle());
             foldedViewHolder.trailer.setImageResource(0);
+            TextView moreDetails = (TextView) cell.findViewById(R.id.more_details);
+
+            moreDetails.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getContext(), TicketsBookingActivity.class);
+                    intent.putExtra("movie_ratings", movie.getMovieRating());
+                    intent.putExtra("movie_name", movie.getOriginalTitle());
+                    intent.putExtra("movie_overview", movie.getOverview());
+                    getContext().startActivity(intent);
+                }
+            });
             foldedViewHolder.trailer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
